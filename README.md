@@ -55,3 +55,10 @@ Use `.flush()` to force evaluation if you need the result.
 
 `options.now` is an optional clock function returning epoch milliseconds; defaults to
 `Date.now`.
+
+## Design notes
+
+The window stores values eagerly rather than keeping running aggregates. Running
+sums drift with floating point over long streams, and recomputing from a small
+buffer is cheap enough that the drift is not worth the speed.
+
